@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লাভ ক্যালকুলেটর - Love Calculator</title>
+
+    <!-- অটো/পপ-আন্ডার অ্যাড স্ক্রিপ্ট -->
+    <script data-cfasync="false" src="https://bauval.org/14/96794aed5f5e3fba0528dd29a6e65dda"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+
+        /* অ্যাড কনটেইনার ডিজাইন */
+        .ad-container {
+            width: 320px;
+            height: 50px;
+            margin: 6px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .ad-container iframe {
+            border: none;
+            width: 320px;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 25px 20px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .input-box {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            border: 2px solid #ffccd5;
+            border-radius: 10px;
+            outline: none;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        input:focus {
+            border-color: #ff4d6d;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #c9184a;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #fff0f3;
+            display: none;
+        }
+
+        .result h2 {
+            font-size: 30px;
+            color: #ff4d6d;
+            margin-bottom: 5px;
+        }
+
+        .result p {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- অ্যাড ১ এবং ২ -->
+    <div class="ad-container" id="ad-slot-1"></div>
+    <div class="ad-container" id="ad-slot-2"></div>
+
+    <!-- মূল কার্ড -->
+    <div class="card">
+        <h1>❤️ লাভ ক্যালকুলেটর ❤️</h1>
+
+        <!-- অ্যাড ৩ -->
+        <div class="ad-container" id="ad-slot-3"></div>
+        
+        <div class="input-group">
+            <div class="input-box">
+                <label for="firstName">তোমার নামের ১ম অক্ষর</label>
+                <input type="text" id="firstName" maxlength="1" placeholder="?">
+            </div>
+            <div class="input-box">
+                <label for="secondName">সঙ্গীর নামের ১ম অক্ষর</label>
+                <input type="text" id="secondName" maxlength="1" placeholder="?">
+            </div>
+        </div>
+
+        <button onclick="calculateLove()">ভালোবাসার পরিমাপ দেখো</button>
+
+        <!-- অ্যাড ৪ -->
+        <div class="ad-container" id="ad-slot-4" style="margin-top: 15px;"></div>
+
+        <div class="result" id="resultArea">
+            <h2 id="percentage">0%</h2>
+            <p id="message"></p>
+        </div>
+    </div>
+
+    <!-- অ্যাড ৫ থেকে ১০ -->
+    <div class="ad-container" id="ad-slot-5"></div>
+    <div class="ad-container" id="ad-slot-6"></div>
+    <div class="ad-container" id="ad-slot-7"></div>
+    <div class="ad-container" id="ad-slot-8"></div>
+    <div class="ad-container" id="ad-slot-9"></div>
+    <div class="ad-container" id="ad-slot-10"></div>
+
+    <script>
+        // লাভ ক্যালকুলেটর ফাংশন
+        function calculateLove() {
+            const letter1 = document.getElementById('firstName').value.trim().toUpperCase();
+            const letter2 = document.getElementById('secondName').value.trim().toUpperCase();
+            const resultArea = document.getElementById('resultArea');
+            const percentageElement = document.getElementById('percentage');
+            const messageElement = document.getElementById('message');
+
+            if (letter1 === "" || letter2 === "") {
+                alert("দয়া করে দুটি নামেরই প্রথম অক্ষর দিন!");
+                return;
+            }
+
+            const combinedCode = letter1.charCodeAt(0) + letter2.charCodeAt(0);
+            const lovePercentage = (combinedCode * 7) % 51 + 50; 
+
+            percentageElement.innerText = lovePercentage + "%";
+
+            if (lovePercentage >= 85) {
+                messageElement.innerText = "ওয়াও! চমৎকার ও খাঁটি ভালোবাসা! ❤️";
+            } else if (lovePercentage >= 70) {
+                messageElement.innerText = "খুবই সুন্দর সম্পর্ক! 💖";
+            } else {
+                messageElement.innerText = "ভালো সম্পর্ক, একটু যত্ন নিলে আরও সুন্দর হবে! 😊";
+            }
+
+            resultArea.style.display = "block";
+        }
+
+        // বিজ্ঞাপন লোড এবং প্রতি 4 সেকেন্ডে রিফ্রেশ করার কোড
+        const totalAds = 10;
+        const refreshInterval = 3000; // 4 সেকেন্ড (4,০০০ মিলি-সেকেন্ড)
+
+        function refreshAdSlot(slotNumber) {
+            const container = document.getElementById('ad-slot-' + slotNumber);
+            if (!container) return;
+
+            // নতুন আইফ্রেম তৈরি করে বিজ্ঞাপন ইনজেক্ট করা
+            const iframe = document.createElement('iframe');
+            iframe.scrolling = "no";
+            iframe.frameBorder = "0";
+
+            container.innerHTML = ''; // আগের অ্যাড মুছে ফেলা
+            container.appendChild(iframe);
+
+            const adDocument = iframe.contentWindow.document;
+            const adCode = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>body{margin:0;padding:0;overflow:hidden;display:flex;justify-content:center;align-items:center;background:transparent;}</style>
+                </head>
+                <body>
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : '0b4be3a65a421170608fddd10b846e14',
+                            'format' : 'iframe',
+                            'height' : 50,
+                            'width' : 320,
+                            'params' : {}
+                        };
+                    <\/script>
+                    <script type="text/javascript" src="https://bauval.org/22/0b4be3a65a421170608fddd10b846e14"><\/script>
+                </body>
+                </html>
+            `;
+
+            adDocument.open();
+            adDocument.write(adCode);
+            adDocument.close();
+        }
+
+        function loadAllAds() {
+            for (let i = 1; i <= totalAds; i++) {
+                refreshAdSlot(i);
+            }
+        }
+
+        // পেজ লোড হওয়ার সাথে সাথে প্রথমবার অ্যাডগুলো লোড হবে
+        window.onload = function() {
+            loadAllAds();
+
+            // প্রতি 4 সেকেন্ড পর পর 10টি অ্যাড একসাথে পরিবর্তিত হবে
+            setInterval(function() {
+                loadAllAds();
+            }, refreshInterval);
+        };
+    </script>
+
+</body>
+</html>
